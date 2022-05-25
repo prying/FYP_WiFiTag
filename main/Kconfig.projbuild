@@ -1,0 +1,45 @@
+menu "WiFi connection"
+
+	choice 
+		prompt "WPA2 Personal or WPA2 Enterprise"
+		default WPA_WPA2_PERSONAL
+    config WPA_WPA2_PERSONAL
+      bool "WPA_WPA2_PSK"
+		config WPA_WPA2_ENTERPRISE
+      bool "WPA_WPA2_ENT"
+	endchoice
+  
+  config WIFI_SSID
+    string "WiFi SSID"
+    default "eduroam"
+
+	if WPA_WPA2_PERSONAL
+
+		config WIFI_PASSWORD
+			string "WiFi Password"
+			default "Password"
+
+	endif 
+
+	if WPA_WPA2_ENTERPRISE
+
+		config EAP_ID
+			string "EAP ID"
+			default "example@student.monash.edu"
+
+		config EAP_USERNAME
+			string "EAP USERNAME"
+			default "example@student.monash.edu"
+
+		config EAP_PASSWORD
+			string "EAP PASSWORD"
+			default "password"
+
+		config EAP_USE_CERTIFICATE
+			bool "Use certificate in ca.pem"
+			default y
+	endif
+ 
+
+endmenu
+
